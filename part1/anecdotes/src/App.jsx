@@ -13,7 +13,8 @@ const App = () => {
   ]
    
   const [selected, setSelected] = useState(0)
-  const [votes, setVote] = useState(Array(9).fill(0))
+  const [votes, setVote] = useState(Array(8).fill(0))
+  const mostVoted = votes.indexOf(Math.max(...votes))
 
   const updateVote = () => {
     const votesCopy = [...votes]
@@ -23,10 +24,15 @@ const App = () => {
 
   return (
     <div>
+      <h1>Anecdote of the day</h1>
       <p>{anecdotes[selected]}</p>
       <p>has {votes[selected]} votes</p>
       <button onClick={() => updateVote()}>vote</button>
-      <button onClick={() => setSelected(Math.floor(Math.random() * 7))}>next anecdote</button>
+      <button onClick={() => setSelected(Math.floor(Math.random() * 8))}>next anecdote</button>
+
+      <h2>Anecdote with most votes</h2>
+      <p>{anecdotes[mostVoted]}</p>
+      <p>has {Math.max(...votes)} votes</p>
     </div>
   )
 }
